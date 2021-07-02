@@ -1,14 +1,20 @@
 package models.personagens;
 
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import models.enums.Direcao;
 
 public class Personagem {
 	public int posX, posY;
+	public Dimension tamanho;
 	public Direcao direcao;
+	
 	public ImageIcon imagem;
 	public ImageIcon leftImg, rightImg, upImg, downImg;
+	public JLabel label;
 	
 	public Personagem(int posX, int posY) {
 		this.posX = posX;

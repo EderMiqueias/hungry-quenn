@@ -1,6 +1,9 @@
 package models.personagens;
 
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Formiga extends Personagem{
 	public boolean carregada = false;
@@ -9,6 +12,8 @@ public class Formiga extends Personagem{
 		super(posX, posY);
 		this.soltarCarga();
 		this.imagem = this.rightImg;
+		this.label = new JLabel(this.imagem);
+		this.tamanho = new Dimension(this.imagem.getIconWidth(), this.imagem.getIconWidth());
 	}
 	
 	public void pegarFolha() {
