@@ -1,9 +1,6 @@
 package models.personagens;
 
-import java.awt.Dimension;
-
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class Sapo extends Personagem {
 
@@ -16,9 +13,9 @@ public class Sapo extends Personagem {
 		this.leftImg = new ImageIcon("img/frog/left1.png");
 		
 		this.imagem = this.rightImg;
-		this.label = new JLabel(this.imagem);
 		
-		this.tamanho = new Dimension(this.imagem.getIconWidth(), this.imagem.getIconWidth());
+		this.setLabelImage();
+		this.setLabelBounds();
 	}
 
 }

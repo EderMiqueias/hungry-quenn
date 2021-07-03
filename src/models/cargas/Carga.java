@@ -15,4 +15,8 @@ public class Carga {
 		this.posX = posX;
 		this.posY = posY;
 	}
+	
+	public void setLabelBounds() {
+		this.label.setBounds(posX, posY, this.imagem.getIconWidth(), this.imagem.getIconHeight());
+	}
 }

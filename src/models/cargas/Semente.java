@@ -14,5 +14,7 @@ public class Semente extends Carga{
 		this.label = new JLabel(this.imagem);
 		
 		this.tamanho = new Dimension(this.imagem.getIconWidth(), this.imagem.getIconWidth());
+		
+		this.setLabelBounds();
 	}
 }
