@@ -79,6 +79,38 @@ public abstract class Fase extends View{
 			System.exit(0);
 	}
 	
+	public void toggleCarga() {
+		if(this.formiga.carregando == null) {
+			Folha pegouFolha = pegarFolha();
+			if (pegouFolha == null)
+				pegarSemente();
+		} else {
+			this.formiga.soltarCarga();
+		}
+	}
+	
+	public Folha pegarFolha() {
+		for(Folha folha : this.folhasLista) {
+			if (this.formiga.retangulo.intersects(folha.retangulo)) {
+				this.formiga.pegarFolha(folha);
+				folha.toggleCarga();
+				return folha;
+			}
+		}
+		return null;
+	}
+	
+	public Semente pegarSemente() {
+		for(Semente semente: this.sementesLista) {
+			if (this.formiga.retangulo.intersects(semente.retangulo)) {
+				this.formiga.pegarSemente(semente);
+				semente.toggleCarga();
+				return semente;
+			}
+		}
+		return null;
+	}
+	
 	private class TKey extends KeyAdapter {
 		public void keyReleased(KeyEvent e) {
 			switch (e.getKeyCode()) {
@@ -97,13 +129,16 @@ public abstract class Fase extends View{
 			case KeyEvent.VK_LEFT:
 				Fase.this.formiga.turnLeft();
 				break;
+			case KeyEvent.VK_ENTER:
+				Fase.this.toggleCarga();
+				break;
 			default:
 				break;
 			}
 		}
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-				Fase.this.formiga.movimentar(10, Fase.this.getContentPane().getWidth(),
+				Fase.this.formiga.movimentar(30, Fase.this.getContentPane().getWidth(),
 						Fase.this.getContentPane().getHeight() - Fase.this.borderHeight);
 			}
 		}

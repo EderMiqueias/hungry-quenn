@@ -1,22 +1,25 @@
 package models.cargas;
 
-import java.awt.Dimension;
+import models.Ator;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-public class Carga {
-	public int posX, posY;
-	public ImageIcon imagem;
-	public JLabel label;
-	public Dimension tamanho;
+public class Carga extends Ator{
 	
 	public Carga(int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+		super(posX, posY);
 	}
 	
-	public void setLabelBounds() {
-		this.label.setBounds(posX, posY, this.imagem.getIconWidth(), this.imagem.getIconHeight());
+	public void soltar(int posX, int posY) {
+		this.moverPara(posX, posY);
+		this.toggleCarga();
+	}
+	
+	public void moverPara(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+		this.updateBounds();
+	}
+	
+	public void toggleCarga() {
+		this.label.setVisible(!this.label.isVisible());
 	}
 }
