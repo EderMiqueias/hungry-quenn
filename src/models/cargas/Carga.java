@@ -27,8 +27,8 @@ public abstract class Carga extends Ator{
 		this.label.setVisible(!this.label.isVisible());
 	}
 	
-	public void devorar() {
-//		pont morto definido em -999
+	public void devorarCarga() {
+//		ponto morto definido em -999
 		this.label.setVisible(false);
 		this.label = null;
 		this.retangulo = null;
@@ -48,7 +48,7 @@ public abstract class Carga extends Ator{
 	
 	public abstract void autoRemove();
 	
-	public class PossoComer extends Thread {
+	private class PossoComer extends Thread {
 		Rainha rainha;
 		Carga carga;
 		public boolean continuar;
@@ -64,7 +64,7 @@ public abstract class Carga extends Ator{
 			synchronized (this) {
 				while (this.continuar) {
 					if (this.rainha.retangulo.intersects(this.carga.retangulo)) {
-						this.carga.devorar();
+						this.carga.devorarCarga();
 					}
 					try {
 						Thread.sleep(1000);

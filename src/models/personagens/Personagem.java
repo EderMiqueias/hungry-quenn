@@ -8,15 +8,21 @@ import models.Ator;
 import models.enums.Direcao;
 
 public abstract class Personagem extends Ator {
+	public int limX, limY;
 	public boolean emMovimento;
 	public Direcao direcao;
 
 	public ImageIcon leftImg, rightImg, upImg, downImg;
+	
+	public Personagem.MovimentoVaiVolta movimentoVaiVolta;
 
-	public Personagem(int posX, int posY) {
+	public Personagem(int posX, int posY, int limX, int limY) {
 		super(posX, posY);
 		this.emMovimento = false;
 		this.direcao = Direcao.RIGHT;
+		
+		this.limX = limX;
+		this.limY = limY;
 	}
 
 	public abstract void setImgsDefault();
@@ -61,8 +67,25 @@ public abstract class Personagem extends Ator {
 			break;
 		}
 	}
+	
+	public void turnToDirection(Direcao direcao) {
+		switch (direcao) {
+		case UP:
+			this.turnUp();
+			break;
+		case RIGHT:
+			this.turnRight();
+			break;
+		case DOWN:
+			this.turnDown();
+			break;
+		case LEFT:
+			this.turnLeft();
+			break;
+		}
+	}
 
-	public void movimentar(int velocidade, int limX, int limY) {
+	public void movimentar(int velocidade) {
 		if (this.emMovimento) {
 			switch (this.direcao) {
 			case UP:
@@ -70,11 +93,11 @@ public abstract class Personagem extends Ator {
 					this.posY -= velocidade;
 				break;
 			case RIGHT:
-				if (this.posX + velocidade + this.retangulo.width < limX)
+				if (this.posX + velocidade + this.retangulo.width < this.limX)
 					this.posX += velocidade;
 				break;
 			case DOWN:
-				if (this.posY + velocidade + this.retangulo.height < limY)
+				if (this.posY + velocidade + this.retangulo.height < this.limY)
 					this.posY += velocidade;
 				break;
 			case LEFT:
@@ -93,7 +116,7 @@ public abstract class Personagem extends Ator {
 		JLabel label;
 		Personagem personagem;
 
-		public MovimentoVaiVolta(int velocidade, int limI, int limF, int limX, int limY) {
+		public MovimentoVaiVolta(int velocidade, int limI, int limF) {
 			super();
 			this.personagem = Personagem.this;
 			this.label = Personagem.this.label;
@@ -101,8 +124,6 @@ public abstract class Personagem extends Ator {
 			this.velocidade = velocidade;
 			this.limI = limI;
 			this.limF = limF;
-			this.limY = limY;
-			this.limX = limX;
 			
 			this.continuar = true;
 			this.personagem.emMovimento = true;
@@ -112,7 +133,7 @@ public abstract class Personagem extends Ator {
 			synchronized (this) {
 				while (this.continuar) {
 					do {
-						this.personagem.movimentar(this.velocidade, this.limX, this.limY);
+						this.personagem.movimentar(this.velocidade);
 						try {
 							Thread.sleep(100);
 						}

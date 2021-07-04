@@ -3,15 +3,14 @@ package models.personagens;
 import javax.swing.ImageIcon;
 
 public class Rainha extends Personagem {
-	public Personagem.MovimentoVaiVolta movimentoVaiVolta;
 	
-	public Rainha(int posX, int posY) {
-		super(posX, posY);
+	public Rainha(int posX, int posY, int limX, int limY) {
+		super(posX, posY, limX, limY);
 		this.setImgsDefault();
 
 		this.imagem = this.rightImg;
 		
-		this.movimentoVaiVolta = new Personagem.MovimentoVaiVolta(2, 5, 200, 400, 400);
+		this.movimentoVaiVolta = new Personagem.MovimentoVaiVolta(2, 5, 200);
 		this.updateLabelImage();
 	}
 

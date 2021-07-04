@@ -9,8 +9,8 @@ import models.cargas.Semente;
 public class Formiga extends Personagem{
 	public Carga carregando = null;
 
-	public Formiga(int posX, int posY) {
-		super(posX, posY);
+	public Formiga(int posX, int posY, int limX, int limY) {
+		super(posX, posY, limX, limY);
 		this.emMovimento = true;
 		this.setImgsDefault();
 		

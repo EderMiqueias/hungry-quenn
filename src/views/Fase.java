@@ -11,13 +11,14 @@ import javax.swing.JOptionPane;
 
 import models.cargas.Folha;
 import models.cargas.Semente;
+import models.enums.Direcao;
 import models.personagens.Formiga;
 import models.personagens.Rainha;
 import models.personagens.Sapo;
 
 public abstract class Fase extends View{
 	private static final long serialVersionUID = 1L;
-	private final int borderHeight = 28;
+	protected final int borderHeight = 28;
 	
 	Formiga formiga;
 	Rainha rainha;
@@ -26,7 +27,7 @@ public abstract class Fase extends View{
 	ArrayList<Folha> folhasLista = new ArrayList<Folha>();
 	ArrayList<Semente> sementesLista = new ArrayList<Semente>();
 	
-	JLabel backgroundLabel;
+	protected JLabel backgroundLabel;
 	ImageIcon icone;
 
 	TKey tkey;
@@ -43,8 +44,10 @@ public abstract class Fase extends View{
 		this.icone = new ImageIcon("img/icon.png");
 		setIconImage(this.icone.getImage());
 		
-		this.formiga = new Formiga(50, 100);
-		this.rainha = new Rainha(10, 10);
+		this.formiga = new Formiga(50, 100, this.backgroundLabel.getIcon().getIconWidth(),
+				this.backgroundLabel.getIcon().getIconHeight() + borderHeight);
+		this.rainha = new Rainha(10, 10, this.backgroundLabel.getIcon().getIconWidth(),
+				this.backgroundLabel.getIcon().getIconHeight() + borderHeight);
 		
 		add(this.formiga.label);
 		add(this.rainha.label);
@@ -62,9 +65,22 @@ public abstract class Fase extends View{
 		this.add(sapo.label);
 	}
 	
+	public void addSapo(int posX, int posY, Direcao direcao, int velocidade, int limI, int limF) {
+		Sapo sapo = new Sapo(posX, posY, this.backgroundLabel.getIcon().getIconWidth(),
+				this.backgroundLabel.getIcon().getIconHeight() + this.borderHeight);
+		sapo.start(this.formiga, direcao, velocidade, limI, limF);
+		this.saposLista.add(sapo);
+		this.add(sapo.label);
+	}
+	
 	public void addFolha(int posX, int posY) {
 		Folha folha = new Folha(posX, posY, this.folhasLista);
 		folha.start(this.rainha);
+		this.folhasLista.add(folha);
+		this.add(folha.label);
+	}
+	
+	public void addFolha(Folha folha) {
 		this.folhasLista.add(folha);
 		this.add(folha.label);
 	}
@@ -78,6 +94,11 @@ public abstract class Fase extends View{
 	public void addSemente(int posX, int posY) {
 		Semente semente = new Semente(posX, posY, this.sementesLista);
 		semente.start(this.rainha);
+		this.sementesLista.add(semente);
+		this.add(semente.label);
+	}
+	
+	public void addSemente(Semente semente) {
 		this.sementesLista.add(semente);
 		this.add(semente.label);
 	}
@@ -154,8 +175,7 @@ public abstract class Fase extends View{
 		}
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-				Fase.this.formiga.movimentar(30, Fase.this.getContentPane().getWidth(),
-						Fase.this.getContentPane().getHeight() - Fase.this.borderHeight);
+				Fase.this.formiga.movimentar(30);
 			}
 		}
 	}
