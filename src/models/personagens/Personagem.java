@@ -88,7 +88,7 @@ public abstract class Personagem extends Ator {
 
 	public class MovimentoVaiVolta extends Thread {
 		public int velocidade, limX, limY, limI, limF;
-		boolean continuar;
+		public boolean continuar;
 
 		JLabel label;
 		Personagem personagem;
@@ -103,6 +103,7 @@ public abstract class Personagem extends Ator {
 			this.limF = limF;
 			this.limY = limY;
 			this.limX = limX;
+			
 			this.continuar = true;
 			this.personagem.emMovimento = true;
 		}

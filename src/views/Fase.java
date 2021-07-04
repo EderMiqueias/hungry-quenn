@@ -62,14 +62,30 @@ public abstract class Fase extends View{
 		this.add(sapo.label);
 	}
 	
-	public void addFolha(Folha folha) {
+	public void addFolha(int posX, int posY) {
+		Folha folha = new Folha(posX, posY, this.folhasLista);
+		folha.start(this.rainha);
 		this.folhasLista.add(folha);
 		this.add(folha.label);
 	}
 	
-	public void addSemente(Semente semente) {
+	public void removeFolha(Folha folha) {
+		if (this.folhasLista.contains(folha)) {
+			this.folhasLista.remove(folha);
+		}
+	}
+	
+	public void addSemente(int posX, int posY) {
+		Semente semente = new Semente(posX, posY, this.sementesLista);
+		semente.start(this.rainha);
 		this.sementesLista.add(semente);
 		this.add(semente.label);
+	}
+	
+	public void removeSemnete(Semente semente) {
+		if (this.sementesLista.contains(semente)) {
+			this.sementesLista.remove(semente);
+		}
 	}
 	
 	public void encerrar() {

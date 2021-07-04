@@ -22,4 +22,5 @@ public class Rainha extends Personagem {
 		this.downImg = new ImageIcon("img/quenn/down1.png");
 		this.leftImg = new ImageIcon("img/quenn/left1.png");
 	}
+	
 }
