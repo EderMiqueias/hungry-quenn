@@ -58,7 +58,7 @@ public class Sapo extends Personagem {
 						this.sapo.ataque();
 					}
 					try {
-						Thread.sleep(200);
+						Thread.sleep(50);
 					}
 					catch (InterruptedException e) {
 						JOptionPane.showMessageDialog(null, "Erro ao executar, o jogo será finalizado!");
