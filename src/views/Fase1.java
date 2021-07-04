@@ -27,6 +27,8 @@ public class Fase1 extends Fase {
 		this.addSemente(new Semente(1000, 100));
 		this.addSemente(new Semente(650, 400));
 		
+		this.rainha.movimentoVaiVolta.start();
+		
 		add(this.backgroundLabel);
 		setVisible(true);
 	}
