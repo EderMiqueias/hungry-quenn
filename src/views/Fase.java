@@ -36,7 +36,7 @@ public abstract class Fase extends View {
 
 	public Fase(String title, String backgroundURL) {
 		super(title);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //		setUndecorated(true);
 
 		this.backgroundLabel = new JLabel(new ImageIcon(backgroundURL));

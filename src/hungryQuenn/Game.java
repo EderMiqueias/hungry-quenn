@@ -1,10 +1,10 @@
 package hungryQuenn;
 
-import views.Fase1;
+import views.Menu;
 
 public class Game {
 
 	public static void main(String[] args) {
-		new Fase1();
+		new Menu();
 	}
 }
