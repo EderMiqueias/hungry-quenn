@@ -4,14 +4,14 @@ import java.awt.Color;
 
 import models.enums.Direcao;
 
-public class Fase1 extends Fase {
+public class Fase2 extends Fase {
 	private static final long serialVersionUID = 1L;
 	int velocidadeSapos;
 
-	public Fase1() {
-		super("HungryQuenn Nivel 1", "img/maps/fase1.png");
-		this.velocidadeSapos = 10;
-		this.cargasRestantesLabel.setForeground(Color.DARK_GRAY);
+	public Fase2() {
+		super("HungryQuenn Nivel 2", "img/maps/fase2.png");
+		this.velocidadeSapos = 12;
+		this.cargasRestantesLabel.setForeground(Color.WHITE);
 		
 		this.addSapo(300, 300, Direcao.RIGHT, this.velocidadeSapos, 200, 400);
 		this.addSapo(620, 250, Direcao.DOWN, this.velocidadeSapos, 50, 400);
@@ -26,9 +26,12 @@ public class Fase1 extends Fase {
 		
 		this.addFolha(750, 600);
 		this.addFolha(150, 350);
+		this.addFolha(450, 160);
+		this.addFolha(500, 550);
 		
 		this.addSemente(400, 600);
 		this.addSemente(650, 400);
+		this.addSemente(50, 400);
 
 		this.rainha.movimentoVaiVolta.start();
 		

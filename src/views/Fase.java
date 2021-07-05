@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -46,7 +45,6 @@ public abstract class Fase extends View {
 		this.cargasRestantesLabel = new JLabel("Alimentos Restantes: " + this.cargasRestantes);
 		this.cargasRestantesLabel.setBounds(this.backgroundLabel.getIcon().getIconWidth() - 250, 0, 250, 50);
 		this.cargasRestantesLabel.setFont(new Font("Serif", Font.BOLD, 18));
-		this.cargasRestantesLabel.setForeground(Color.DARK_GRAY);
 
 		this.formiga = new Formiga(50, 100, this.backgroundLabel.getIcon().getIconWidth(),
 				this.backgroundLabel.getIcon().getIconHeight() + borderHeight);
@@ -132,8 +130,9 @@ public abstract class Fase extends View {
 	public void encerrar() {
 		String msg = "Deseja Sair do HungryQueen?";
 		int opcao = JOptionPane.showConfirmDialog(null, msg, msg, JOptionPane.YES_NO_OPTION);
-		if (opcao == JOptionPane.YES_OPTION)
-			System.exit(0);
+		if (opcao == JOptionPane.YES_OPTION) {
+			this.finalizar();
+		}
 	}
 
 	public void finalizar() {
