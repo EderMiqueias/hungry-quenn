@@ -1,15 +1,13 @@
 package models.cargas;
 
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
-public class Folha extends Carga{
-	ArrayList<Folha> folhasLista;
+import views.Fase;
 
-	public Folha(int posX, int posY, ArrayList<Folha> folhasLista) {
+public class Folha extends Carga{
+
+	public Folha(int posX, int posY) {
 		super(posX, posY);
-		this.folhasLista = folhasLista;
 		
 		this.imagem = new ImageIcon("img/loads/leaf.png");
 		this.retangulo.setSize(this.imagem.getIconWidth(), this.imagem.getIconHeight());
@@ -18,7 +16,7 @@ public class Folha extends Carga{
 	}
 
 	@Override
-	public void autoRemove() {
-		this.folhasLista.remove(this);
+	public void autoRemove(Fase fase) {
+		fase.removeFolha(this);
 	}
 }

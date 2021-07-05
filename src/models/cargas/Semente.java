@@ -1,24 +1,22 @@
 package models.cargas;
 
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
-public class Semente extends Carga{
-	ArrayList<Semente> sementesLista;
+import views.Fase;
 
-	public Semente(int posX, int posY, ArrayList<Semente> sementesLista) {
+public class Semente extends Carga{
+
+	public Semente(int posX, int posY) {
 		super(posX, posY);
-		this.sementesLista = sementesLista;
 		
 		this.imagem = new ImageIcon("img/loads/seed.png");
 		this.retangulo.setSize(this.imagem.getIconWidth(), this.imagem.getIconHeight());	
 		
 		this.updateLabelImage();
 	}
-	
+
 	@Override
-	public void autoRemove() {
-		this.sementesLista.remove(this);
+	public void autoRemove(Fase fase) {
+		fase.removeSemente(this);
 	}
 }
