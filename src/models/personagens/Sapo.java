@@ -4,9 +4,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import models.enums.Direcao;
+import views.Fase;
+import views.GameOver;
 
 public class Sapo extends Personagem {
-	Atacar atacar;
+	public Atacar atacar;
 
 	public Sapo(int posX, int posY, int limX, int limY) {
 		super(posX, posY, limX, limY);
@@ -17,8 +19,8 @@ public class Sapo extends Personagem {
 		this.updateLabelImage();
 	}
 	
-	public void start(Formiga formiga, Direcao direcao, int velocidade, int limI, int limF) {
-		this.atacar = new Atacar(formiga);
+	public void start(Formiga formiga, Fase fase, Direcao direcao, int velocidade, int limI, int limF) {
+		this.atacar = new Atacar(formiga, fase);
 		this.atacar.start();
 		
 		this.turnToDirection(direcao);
@@ -27,8 +29,9 @@ public class Sapo extends Personagem {
 		this.movimentoVaiVolta.start();
 	}
 	
-	public void ataque() {
-		System.out.println("yoink!");
+	public void ataque(Fase fase) {
+		new GameOver();
+		fase.finalizar();
 	}
 
 	@Override
@@ -39,14 +42,17 @@ public class Sapo extends Personagem {
 		this.leftImg = new ImageIcon("img/frog/left1.png");
 	}
 	
-	private class Atacar extends Thread {
+	public class Atacar extends Thread {
 		Formiga formiga;
 		Sapo sapo;
+		Fase fase;
 		public boolean continuar;
 		
-		public Atacar(Formiga formiga) {
+		public Atacar(Formiga formiga, Fase fase) {
 			this.sapo = Sapo.this;
 			this.formiga = formiga;
+			
+			this.fase = fase;
 			
 			this.continuar = true;
 		}
@@ -55,7 +61,7 @@ public class Sapo extends Personagem {
 			synchronized (this) {
 				while (this.continuar) {
 					if (this.sapo.retangulo.intersects(this.formiga.retangulo)) {
-						this.sapo.ataque();
+						this.sapo.ataque(this.fase);
 					}
 					try {
 						Thread.sleep(50);

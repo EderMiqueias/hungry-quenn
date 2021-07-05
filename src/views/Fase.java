@@ -28,7 +28,6 @@ public abstract class Fase extends View{
 	ArrayList<Semente> sementesLista = new ArrayList<Semente>();
 	
 	protected JLabel backgroundLabel;
-	ImageIcon icone;
 
 	TKey tkey;
 
@@ -40,9 +39,6 @@ public abstract class Fase extends View{
 		this.backgroundLabel = new JLabel(new ImageIcon(backgroundURL));
 		this.backgroundLabel.setBounds(0, 0, this.backgroundLabel.getIcon().getIconWidth(),
 				this.backgroundLabel.getIcon().getIconHeight());
-		
-		this.icone = new ImageIcon("img/icon.png");
-		setIconImage(this.icone.getImage());
 		
 		this.formiga = new Formiga(50, 100, this.backgroundLabel.getIcon().getIconWidth(),
 				this.backgroundLabel.getIcon().getIconHeight() + borderHeight);
@@ -68,7 +64,7 @@ public abstract class Fase extends View{
 	public void addSapo(int posX, int posY, Direcao direcao, int velocidade, int limI, int limF) {
 		Sapo sapo = new Sapo(posX, posY, this.backgroundLabel.getIcon().getIconWidth(),
 				this.backgroundLabel.getIcon().getIconHeight() + this.borderHeight);
-		sapo.start(this.formiga, direcao, velocidade, limI, limF);
+		sapo.start(this.formiga, this, direcao, velocidade, limI, limF);
 		this.saposLista.add(sapo);
 		this.add(sapo.label);
 	}
@@ -114,6 +110,19 @@ public abstract class Fase extends View{
 		int opcao = JOptionPane.showConfirmDialog(null, msg, msg, JOptionPane.YES_NO_OPTION);
 		if (opcao == JOptionPane.YES_OPTION)
 			System.exit(0);
+	}
+	
+	public void finalizar() {
+		this.rainha.emMovimento = false;
+		this.formiga.emMovimento = false;
+		
+		for (Sapo sapo : this.saposLista) {
+			sapo.emMovimento = false;
+			sapo.atacar.continuar = false;
+		}
+		
+		this.setVisible(false);
+		this.dispose();
 	}
 	
 	public void toggleCarga() {
