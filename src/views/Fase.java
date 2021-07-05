@@ -123,6 +123,10 @@ public abstract class Fase extends View {
 	public void updateCargasRestantesLabel(int valor) {
 		this.cargasRestantes += valor;
 		this.cargasRestantesLabel.setText("Alimentos Restantes: " + this.cargasRestantes);
+		if (this.cargasRestantes == 0) {
+			new Parabens();
+			this.finalizar();
+		}
 	}
 
 	public void encerrar() {
